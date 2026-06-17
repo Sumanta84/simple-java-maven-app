@@ -9,24 +9,25 @@ pipeline{
         APP_NAME='sample-app'
     }
     stages{
-        stage(Checkout){
+        stage('Checkout'){
             steps{
-                git url:'git@github.com:devopsdiscipuli/simple-java-maven-app.git',
-                branch:'master',
-                credentialsId:'u6-java-project'
+                git( url:'git@github.com:Sumanta84/simple-java-maven-app.git',
+                    branch:'master',
+                    credentialsId:'simple-java-maven-app'
+                )
             }
         }
-        stage('Debug'){
-            steps{
-                sh '''
-                    cat /etc/passwd
-                    cat /etc/group
-                    echo $HOME
-                    ls -ld /root
-                    ls -ld /root/.m2
-                '''
-            }
-        }
+        // stage('Debug'){
+        //     steps{
+        //         sh '''
+        //             cat /etc/passwd
+        //             cat /etc/group
+        //             echo $HOME
+        //             ls -ld /root
+        //             ls -ld /root/.m2
+        //         '''
+            // }
+       // }
         stage('Build'){
             steps{
                 sh 'mvn clean package'
