@@ -12,7 +12,7 @@ pipeline{
         stage('Checkout'){
             steps{
                 git( url:'git@github.com:Sumanta84/simple-java-maven-app.git',
-                    branch:'master',
+                    branch:'main',
                     credentialsId:'simple-java-maven-app'
                 )
             }
