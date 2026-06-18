@@ -2,16 +2,18 @@ pipeline{
     agent{
         docker{
             image 'maven:3.9.16-eclipse-temurin-21-alpine'
-            args '-v ~/.m2:/root/.m2'
+            args '-v /var/lib/jenkins/.m2:/root/.m2'
         }
     }
     environment{
-        APP_NAME='sample-app'
+        APP_NAME = 'sample-app'
     }
     stages{
+
         stage('Checkout'){
             steps{
-                git( url:'git@github.com:Sumanta84/simple-java-maven-app.git',
+                git(
+                    url:'git@github.com:Sumanta84/simple-java-maven-app.git',
                     branch:'main',
                     credentialsId:'simple-java-maven-app'
                 )
