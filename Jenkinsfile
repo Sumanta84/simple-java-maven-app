@@ -17,17 +17,6 @@ pipeline{
                 )
             }
         }
-        // stage('Debug'){
-        //     steps{
-        //         sh '''
-        //             cat /etc/passwd
-        //             cat /etc/group
-        //             echo $HOME
-        //             ls -ld /root
-        //             ls -ld /root/.m2
-        //         '''
-            // }
-       // }
         stage('Build'){
             steps{
                 sh 'mvn clean package'
