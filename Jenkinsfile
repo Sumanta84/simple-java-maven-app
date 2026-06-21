@@ -1,41 +1,28 @@
-pipeline{
-    agent{
-        docker{
-            image 'maven:3.9.16-eclipse-temurin-21-alpine'
-            args '-v maven-repo-cache:/root/.m2'
+pipeline {
+    agent {
+        docker {
+            image 'maven:3.9.6-eclipse-temurin-21-alpine'
         }
     }
-    environment{
-        APP_NAME = 'sample-app'
-    }
-    stages{
 
-        stage('Checkout'){
-            steps{
+    stages {
+        stage('Checkout') {
+            steps {
                 git(
-                    url:'git@github.com:Sumanta84/simple-java-maven-app.git',
-                    branch:'main',
-                    credentialsId:'simple-java-maven-app'
+                    url: 'git@github.com:Sumanta84/simple-java-maven-app.git',
+                    branch: 'main',
+                    credentialsId: 'simple-java-maven-app'
                 )
             }
         }
-        stage('Build'){
-            steps{
-                sh 'mvn clean package -DskipTests'
+
+        stage('Build') {
+            steps {
+                sh '''
+                    mkdir -p /tmp/m2repo
+                    mvn -Dmaven.repo.local=/tmp/m2repo clean package
+                '''
             }
-        }
-        stage('Test'){
-            steps{
-                sh 'mvn test'
-            }
-        }
-    }
-    post{
-        success{
-            echo "${env.APP_NAME} pipeline completed successfully"
-        }
-        failure{
-            echo "${env.APP_NAME} pipeline failed. Check logs"
         }
     }
 }
