@@ -2,7 +2,7 @@ pipeline{
     agent{
         docker{
             image 'maven:3.9.16-eclipse-temurin-21-alpine'
-            args '-v /var/jenkins_home/.m2:/root/.m2'
+            args '-v maven-repo-cache:/root/.m2'
         }
     }
     environment{
