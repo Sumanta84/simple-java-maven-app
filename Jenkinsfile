@@ -13,7 +13,7 @@ pipeline{
             steps{
                 git url:'git@github.com:devopsdiscipuli/simple-java-maven-app.git',
                 branch:'master',
-                credentialsId:'u6-java-project'
+                credentialsId:'simple-java-maven-app'
             }
         }
         // stage('Debug'){
