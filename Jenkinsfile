@@ -12,9 +12,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master',
-                    url: 'git@github.com:devopsdiscipuli/simple-java-maven-app.git',
-                    credentialsId: 'u6-java-project'
+                git branch: 'main',
+                    url: 'git@github.com:Sumanta84/simple-java-maven-app.git',
+                    credentialsId: 'simple-java-maven-app'
             }
         }
         stage('Install Docker CLI') {
