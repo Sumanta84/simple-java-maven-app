@@ -2,7 +2,7 @@ pipeline{
     agent{
         docker{
             image 'maven:3.9.16-eclipse-temurin-21-alpine'
-            args "-v /var/jenkins_home/.m2:/root/.m2 -u root:root"
+            args "-v maven_app/.m2:/root/.m2 -u root:root"
         }
     }
     environment{
