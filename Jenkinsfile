@@ -25,7 +25,7 @@ pipeline {
                 sh '''
                     pwd
                     ls -ltr /var/jenkins_home
-                    ls -ltr /var/jenkins_home/workspace/1.Java-sample-project/.m2
+                    ls -ltr /var/jenkins_home/workspace/1.Java-sample-project/.m2/repository
                 '''
             }
         }

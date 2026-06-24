@@ -12,9 +12,9 @@ pipeline{
     stages{
         stage(Checkout){
             steps{
-                git url:'git@github.com:devopsdiscipuli/simple-java-maven-app.git',
-                branch:'master',
-                credentialsId:'u6-java-project'
+                git branch: 'main',
+                    url: 'git@github.com:Sumanta84/simple-java-maven-app.git',
+                    credentialsId: 'simple-java-maven-app'
             }
         }
         stage('Debug'){
