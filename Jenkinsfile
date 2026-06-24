@@ -32,7 +32,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    mvn -Dmaven.repo.local=/var/jenkins_home/workspace/1.Java-sample-project/repository clean package                   
+                    mvn -Dmaven.repo.local=/var/jenkins_home/workspace/1.Java-sample-project/.m2/repository clean package                   
                     ls /var/jenkins_home/workspace/1.Java-sample-project/.m2
                 '''
             }
