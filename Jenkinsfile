@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn -Dmaven.repo.local=/var/jenkins_home/workspace/1.Java-sample-project/.m2 test'
+                sh 'mvn -Dmaven.repo.local=/var/jenkins_home/workspace/1.Java-sample-project/.m2/repository test'
             }
         }
     }
