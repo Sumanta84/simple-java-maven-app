@@ -2,12 +2,13 @@ pipeline {
     agent {
         docker {
             image 'maven:3.9.16-eclipse-temurin-21-alpine'
-            args '-v maven-repo:/root/.m2 -u root:root'
+            args '-v /var/jenkins_home/.m2:/var/jenkins_home/workspace/MyJob/.m2'
         }
     }
 
     environment {
         APP_NAME = 'sample-app'
+        MAVEN_OPTS='-Dmaven.repo.local=/var/jenkins_home/workspace/MyJob/.m2/repository'
     }
 
     stages {
@@ -19,15 +20,26 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Debug') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                sh '''
+                    pwd
+                    ls -ltr /var/jenkins_home
+                    ls -ltr /var/jenkins_home/workspace/MyJob/.m2
+                '''
             }
         }
-
+        stage('Build') {
+            steps {
+                sh '''
+                    mvn -Dmaven.repo.local=.m2/repository clean package                   
+                    ls /var/jenkins_home/workspace/MyJob/.m2
+                '''
+            }
+        }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh 'mvn -Dmaven.repo.local=.m2/repository test'
             }
         }
     }
