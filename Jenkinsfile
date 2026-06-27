@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         APP_NAME = 'sample-app'
-    //  MAVEN_OPTS='-Dmaven.repo.local=/var/jenkins_home/.m2/repository'
+        //MAVEN_OPTS='-Dmaven.repo.local=/var/jenkins_home/.m2/repository'
     }
 
     stages {
