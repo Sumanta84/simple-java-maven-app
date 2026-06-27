@@ -1,27 +1,24 @@
-pipeline {
-    agent {
-        docker {
+pipeline{
+    agent{
+        docker{
             image 'maven:3.9.16-eclipse-temurin-21-alpine'
             args '-v /var/jenkins_home:/var/jenkins_home'
         }
     }
-
-    environment {
-        APP_NAME = 'sample-app'
+    environment{
+        APP_NAME='sample-app'
         //MAVEN_OPTS='-Dmaven.repo.local=/var/jenkins_home/.m2/repository'
     }
-
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'git@github.com:Sumanta84/simple-java-maven-app.git',
-                    credentialsId: 'simple-java-maven-app'
+    stages{
+        stage('Checkout'){
+            steps{
+                 git branch: 'main',
+                     url: 'git@github.com:Sumanta84/simple-java-maven-app.git',
+                     credentialsId: 'simple-java-maven-app'
             }
         }
-
-        stage('Debug') {
-            steps {
+        stage('Debug'){
+            steps{
                 sh '''
                     pwd
                     ls -ltr /var/jenkins_home
@@ -29,26 +26,27 @@ pipeline {
                 '''
             }
         }
-        stage('Build') {
-            steps {
+        stage('Build'){
+            steps{
                 sh '''
-                    mvn -Dmaven.repo.local=.m2/repository clean package                   
+                    mvn -Dmaven.repo.local=.m2/repository clean package
                     # ls /var/jenkins_home/.m2
+                    # ls /var/jenkins_home/.m2/repository
+                    # sleep 5000
                 '''
             }
         }
-        stage('Test') {
-            steps {
+        stage('Test'){
+            steps{
                 sh 'mvn -Dmaven.repo.local=.m2/repository test'
             }
         }
     }
-
-    post {
-        success {
+    post{
+        success{
             echo "${env.APP_NAME} pipeline completed successfully"
         }
-        failure {
+        failure{
             echo "${env.APP_NAME} pipeline failed. Check logs"
         }
     }
