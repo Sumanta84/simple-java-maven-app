@@ -30,7 +30,6 @@ pipeline{
             steps{
                 sh '''
                     mvn -Dmaven.repo.local=.m2/repository clean package
-
                 '''
             }
         }
